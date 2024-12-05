@@ -19,7 +19,7 @@ class Frontier():
     def empty(self):
         return len(self.frontier)==0
 
-class StackFrontier():
+class StackFrontier(Frontier):
     def remove(self):
         if self.empty():
             raise Exception("empty frontier")
@@ -28,7 +28,7 @@ class StackFrontier():
             self.frontier=self.frontier[:-1]
             return node
         
-class QueueFrontier(StackFrontier):
+class QueueFrontier(Frontier):
     def remove(self):
         if self.empty():
             raise Exception("empty frontier")
@@ -65,9 +65,9 @@ class Maze():
                         self.start=(i,j)
                         row.append(False)
                     elif contents[i][j]=="B":
-                        self.goal=[i,j]
+                        self.goal=(i,j)
                         row.append(False)
-                    elif contents[i][j]=="":
+                    elif contents[i][j]==" ":
                         row.append(False)
                     else:
                         row.append(True)
@@ -111,7 +111,7 @@ class Maze():
                 result.append((action, (r, c)))
         return result
 
-def solve(self):
+    def solve(self):
         """Finds a solution to maze, if one exists."""
 
         # Keep track of number of states explored
@@ -159,7 +159,7 @@ def solve(self):
                     frontier.add(child)
 
 
-def output_image(self, filename, show_solution=True, show_explored=False):
+    def output_image(self, filename, show_solution=True, show_explored=False):
         from PIL import Image, ImageDraw
         cell_size = 50
         cell_border = 2
